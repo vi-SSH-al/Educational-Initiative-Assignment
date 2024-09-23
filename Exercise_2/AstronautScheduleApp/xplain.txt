@@ -1,0 +1,77 @@
+Overview
+The Task Scheduling Application is a console-based tool that helps astronauts manage their daily schedules. It supports CRUD operations (Create, Read, Update, Delete) on tasks, ensuring no overlapping tasks are scheduled. The application utilizes design patterns such as Singleton, Factory, and Observer, along with robust error handling and logging mechanisms.
+
+Code Structure
+1. Task.java
+Purpose: Represents an individual task with attributes like description, start time, end time, priority level, and completion status.
+Key Methods:
+getDescription(): Returns the task description.
+getStartTime(): Returns the start time of the task.
+getEndTime(): Returns the end time of the task.
+getPriority(): Returns the priority level.
+markAsCompleted(): Marks the task as completed.
+2. TaskFactory.java
+Purpose: A factory class responsible for creating Task objects.
+Key Methods:
+createTask(String description, String startTimeStr, String endTimeStr, String priority): Creates and returns a new Task instance using the provided parameters.
+3. Custom Exception Classes
+TaskConflictException: Thrown when a new task conflicts with existing tasks.
+TaskNotFoundException: Thrown when attempting to remove a task that does not exist.
+InvalidTimeFormatException: Thrown when the input time format is invalid.
+4. ScheduleManager.java
+Purpose: The core class that manages all tasks, ensuring a single instance (Singleton pattern).
+Key Methods:
+addTask(Task task): Adds a new task if there are no conflicts. Notifies observers of the addition.
+removeTask(String description): Removes a task based on its description, throwing an exception if not found.
+getTasks(): Returns a list of all scheduled tasks, sorted by start time.
+validateTask(Task newTask): Checks for overlaps with existing tasks before adding a new task.
+markTaskCompleted(String description): Marks a specified task as completed.
+getTasksByPriority(String priority): Retrieves tasks that match a specified priority level.
+5. Observer.java and TaskObserver.java
+Purpose: Implement the Observer pattern to notify observers (e.g., TaskObserver) of changes in the task list.
+Key Method in TaskObserver:
+update(String message): Receives notifications about task changes.
+6. AstronautScheduleApp.java
+Purpose: The main application that provides a console interface for user interaction.
+Key Methods:
+main(String[] args): Entry point of the application.
+displayMenu(): Displays the menu options to the user.
+addTask(...), removeTask(...), viewTasks(...), markTaskCompleted(...), viewTasksByPriority(...): Methods that handle user input for various operations.
+isValidTimeFormat(String time): Validates the input time format.
+Flow of the Application
+Initialization:
+
+The application begins by configuring the logger to record events and errors to a file.
+The ScheduleManager instance is created as a singleton, and a TaskObserver is registered to receive notifications.
+User Interaction:
+
+A menu is displayed, offering options to add, remove, view, or complete tasks.
+The application continuously prompts the user for input until they choose to exit.
+Adding a Task:
+
+When adding a task, the application validates the time format and checks for conflicts with existing tasks.
+If valid, the task is added, and observers are notified.
+Removing a Task:
+
+The user specifies a task to remove, and the application checks if it exists before attempting to remove it.
+Viewing Tasks:
+
+Users can view all tasks or filter tasks by priority level.
+Completing a Task:
+
+Users can mark a task as completed, updating its status.
+Design Patterns Explanation
+Singleton Pattern:
+
+Ensures that only one instance of ScheduleManager exists, managing all task operations throughout the application’s lifecycle.
+Factory Pattern:
+
+The TaskFactory class abstracts the creation of Task objects, promoting a clear separation of task instantiation logic from task management.
+Observer Pattern:
+
+Allows ScheduleManager to notify registered observers (like TaskObserver) whenever tasks are added or modified, facilitating real-time updates.
+Error Handling
+Custom Exceptions: Clearly defined exceptions are used to handle specific errors, allowing for targeted error messages and improved user experience.
+Logging: The application logs significant events and errors, aiding in troubleshooting and maintaining a history of operations.
+Conclusion
+This Task Scheduling Application demonstrates a well-structured approach to managing tasks using best practices in object-oriented design and design patterns. It showcases the importance of error handling, logging, and user interaction in creating a robust and user-friendly console application.
