@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **School Management System** is a terminal-based application designed to manage students and teachers in a school environment. It implements the Composite Design Pattern, allowing users to organize and display school members hierarchically. The system enables customer support representatives to resolve customer issues efficiently by utilizing different resolution strategies.
+The **School Management System** is a terminal-based application designed to manage students and teachers in a school environment. It implements the Composite Design Pattern, allowing users to organize and display school members hierarchically.
 
 ## Features
 
