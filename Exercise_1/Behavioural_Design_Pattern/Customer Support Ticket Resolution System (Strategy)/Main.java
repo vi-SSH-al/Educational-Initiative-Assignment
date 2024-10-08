@@ -10,7 +10,8 @@ public class Main {
         TicketProcessor processor = new TicketProcessor();
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        boolean running = true;
+        while (running) {
             System.out.println("\nCreate a Support Ticket:");
             System.out.println("Enter ticket description: ");
             String description = scanner.nextLine();
@@ -40,6 +41,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Exiting...");
+                    running = false;
                     System.exit(0);
                     break;
                 default:
